@@ -3,22 +3,29 @@
 import tkinter as tk
 import customtkinter as ctk
 from pytube import YouTube as yt
+from yt_dlp import YoutubeDL
 
 # functions
 def startDownload():
     try:
         ytlink = url.get()
-        ytVideo = yt(ytlink) # an object of a YouTube video
+        #ytVideo = yt(ytlink) # an object of a YouTube video
+        
+        with YoutubeDL() as ydl:
+            ydl.download(ytlink)
     
         #mp4 = ytVideo.streams.filter(file_extension="mp.4").all() # get only mp4 files
-        video = ytVideo.streams.get_lowest_resolution() #this is extra but it ensures we download the highest/lowest res per video
-        title.configure(text=ytVideo.title()) # Gets the video title and displays it 
-        video.download()
+        #video = ytVideo.streams.get_lowest_resolution() #this is extra but it ensures we download the highest/lowest res per video
+        #title.configure(text=ytVideo.title()) # Gets the video title and displays it 
+        #video.download()
+        
+        finished.configure(text="Downloaded!", text_color="red")
+        
     except:
         finished.configure(text="Download Error!", text_color="red")
         
     
-    finished.configure(text="Downloaded!")
+    
     
 # System settings
 

@@ -1,8 +1,12 @@
-from pytube import YouTube
+# import pytube
+# link = "https://www.youtube.com/watch?v=WKU2UrhqW7k" 
+# yt = pytube.YouTube(link)
+# stream = yt.streams.get_lowest_resolution()
+# stream.download()
 
-link = input() # https://www.youtube.com/watch?v=RJVCu1wFbJk
 
-yt = YouTube(link)
-mp4 = yt.streams.filter(file_extension="mp4").all()
+from yt_dlp import YoutubeDL
+URLS = "https://www.youtube.com/watch?v=WKU2UrhqW7k"
 
-mp4.download()
+with YoutubeDL() as ydl:
+    ydl.download(URLS)
